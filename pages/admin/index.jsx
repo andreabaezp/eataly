@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from './../../axios-conf'
 import Image from "next/image";
 import { useState } from "react";
 import styles from "../../styles/Admin.module.css";
@@ -12,7 +12,7 @@ const Index = ({ orders, products }) => {
   const handleDelete = async (id) => {
     console.log(id);
     try {
-      const res = await axios.delete(
+      const res = await api.delete(
         "/api/products/" + id
       );
       setPizzaList(pizzaList.filter((pizza) => pizza._id !== id));
@@ -26,7 +26,7 @@ const Index = ({ orders, products }) => {
     const currentStatus = item.status;
 
     try {
-      const res = await axios.put("/api/orders/" + id, {
+      const res = await api.put("/api/orders/" + id, {
         status: currentStatus + 1,
       });
       setOrderList([
@@ -140,8 +140,8 @@ export const getServerSideProps = async (ctx) => {
     };
   }
 
-  const productRes = await axios.get("/api/products");
-  const orderRes = await axios.get("/api/orders");
+  const productRes = await api.get("/api/products");
+  const orderRes = await api.get("/api/orders");
 
   return {
     props: {

@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from './../axios-conf'
 import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
@@ -33,7 +33,7 @@ export const getServerSideProps = async (ctx) => {
      admin = true;
   }
 
-  const res = await axios.get("/api/products");
+  const res = await api.get("/api/products");
   return {
     props: {
       pizzaList: res.data,

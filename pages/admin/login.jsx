@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from './../../axios-conf'
 import { useRouter } from "next/router";
 import { useState } from "react";
 import styles from "../../styles/Login.module.css";
@@ -11,7 +11,7 @@ const Login = () => {
 
   const handleClick = async () => {
     try {
-      await axios.post("/api/login", {
+      await api.post("/api/login", {
         username,
         password,
       });

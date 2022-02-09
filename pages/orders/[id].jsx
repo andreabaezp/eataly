@@ -1,6 +1,6 @@
 import styles from "../../styles/Order.module.css";
 import Image from "next/image";
-import axios from "axios";
+import api from './../../axios-conf'
 import { useEffect, useState } from "react";
 
 const Order = ({ order, orderId }) => {
@@ -9,7 +9,7 @@ const Order = ({ order, orderId }) => {
 
   useEffect(() => {
     const id = setInterval(() => {
-        axios.get(`/api/orders/${orderId}`).then(res => {
+        api.get(`/api/orders/${orderId}`).then(res => {
           setStatus(res.data.status)
         })
         setCheck(check + 1)
@@ -126,7 +126,7 @@ const Order = ({ order, orderId }) => {
 };
 
 export const getServerSideProps = async ({ params }) => {
-  const res = await axios.get(`/api/orders/${params.id}`);
+  const res = await api.get(`/api/orders/${params.id}`);
   return {
     props: { order: res.data, orderId: params.id },
   };
